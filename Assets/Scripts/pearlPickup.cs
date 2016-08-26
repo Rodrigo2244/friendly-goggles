@@ -3,14 +3,22 @@
 public class pearlPickup : MonoBehaviour {
     
 	public AudioClip pickup;
+    bool collected = false;
 
 	void OnTriggerEnter(Collider col){
-		if(col.gameObject.layer == 9){
+		if(col.gameObject.layer == 9 && !collected) {
             if (gameManager.Instance != null) {
                 gameManager.Instance.pearlCount++;
             }
+            collected = true;
             col.GetComponent<AudioSource>().PlayOneShot(pickup, 1);
-            Destroy(gameObject);
+            transform.SetParent(col.transform);
+            transform.localPosition = new Vector3(0,0,0);
+            GetComponent<Animator>().Play("Collected");
 		}
 	}
+
+    void Die() {
+        Destroy(this.gameObject);
+    }
 }

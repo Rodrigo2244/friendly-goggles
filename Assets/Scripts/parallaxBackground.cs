@@ -4,10 +4,11 @@ using System.Collections;
 public class parallaxBackground : MonoBehaviour {
 
 	public Transform cameraObj;
-	public float initial;
-	public float initialCam;
-	public float relativeDistance;
+	float initial;
+	float initialCam;
+	float relativeDistance;
 	public float direction;
+    public float speed;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +20,6 @@ public class parallaxBackground : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		relativeDistance = (initialCam-cameraObj.position.x);
-		transform.position = new Vector3(initial+relativeDistance/10*direction,transform.position.y,transform.position.z);
+		transform.position = new Vector3(initial+relativeDistance/10*direction * speed,transform.position.y,transform.position.z);
 	}
 }

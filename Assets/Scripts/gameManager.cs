@@ -78,7 +78,7 @@ public class gameManager : MonoBehaviour {
     }
 
     IEnumerator Victory(){
-        if (SceneManager.GetActiveScene().buildIndex == SceneManager.GetAllScenes().Length - 1){
+        if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCount - 1){
             SceneManager.LoadScene(0);
         }else {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

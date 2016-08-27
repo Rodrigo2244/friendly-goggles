@@ -8242,18 +8242,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 100012, guid: ee5804def42ee0a4e88b0af6d267bce3, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 21200004, guid: ee5804def42ee0a4e88b0af6d267bce3, type: 2}
-      propertyPath: m_SortingOrder
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 100004, guid: ee5804def42ee0a4e88b0af6d267bce3, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ee5804def42ee0a4e88b0af6d267bce3, type: 2}
   m_IsPrefabParent: 0
@@ -11483,7 +11471,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400008, guid: fa3e38f83112f434ebcd4c547a96f79c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .209000006
+      value: 0.209
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: fa3e38f83112f434ebcd4c547a96f79c, type: 2}
       propertyPath: m_LocalPosition.y
@@ -11511,26 +11499,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: fa3e38f83112f434ebcd4c547a96f79c, type: 2}
       propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: fa3e38f83112f434ebcd4c547a96f79c, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19800006, guid: fa3e38f83112f434ebcd4c547a96f79c, type: 2}
-      propertyPath: InitialModule.startColor.maxColor.rgba
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 19800006, guid: fa3e38f83112f434ebcd4c547a96f79c, type: 2}
-      propertyPath: prewarm
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 21200008, guid: fa3e38f83112f434ebcd4c547a96f79c, type: 2}
-      propertyPath: m_SortingOrder
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 100008, guid: fa3e38f83112f434ebcd4c547a96f79c, type: 2}
-      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

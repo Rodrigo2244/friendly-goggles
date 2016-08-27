@@ -77,9 +77,10 @@ public class moveChar : MonoBehaviour {
 			ControlAnimations();
 
 			//Movement
-			if(hasControl){
+			if(!beingControlled){
 				movement.x = Input.GetAxisRaw(moveInput)*speed;
 			}
+
 			if(controller.isGrounded){
 				movement.y = -Time.deltaTime;
 				if(Input.GetButtonDown(jumpInput)){
@@ -89,7 +90,7 @@ public class moveChar : MonoBehaviour {
 					jumpParticle.Emit(10);
 				}
 			} else {
-				if(useGrav && !beingControlled){
+				if(useGrav){
 					movement.y  += Physics.gravity.y * Time.deltaTime;
 				}
 			}
@@ -106,33 +107,20 @@ public class moveChar : MonoBehaviour {
 				}
 			}
 
-			//Power
-			if(Input.GetButton(powerInput) && usablePower > 0){
-				if(!Bro.GetComponent<moveChar>().isNull){
-					broController.Move(((Bro.transform.position - transform.position).normalized)*Time.deltaTime*powerForce*invert);
-				}
-                foreach (boxBehaviour box in boxes) {
-                    box.useGrav = false;
-                    box.controller.Move(((box.transform.position - transform.position).normalized) * Time.deltaTime * powerForce * invert);
-                }
-
-				usablePower -= Time.deltaTime*50f;
-			} else if (!Input.GetButton(powerInput) && usablePower < 100 && Time.timeScale != 0){
-				usablePower += Time.deltaTime*25f;
-			}
-
-			if(Input.GetButtonDown(powerInput)){
-				powerParticle.Play();
+            //Power
+            if (Input.GetButtonDown(powerInput) && usablePower == 100) {
+                powerParticle.Emit(10);
                 audioSource.PlayOneShot(sounds[1], sfxVolume);
-                TogglePower(true);
-			}
-			if(Input.GetButtonUp(powerInput) || (usablePower <= 0 && Bro.GetComponent<moveChar>().beingControlled)){
-				powerParticle.Stop();
-				if(!broController.isGrounded){
-					//StartCoroutine(SlowMo(0.1f));
-				}
-				TogglePower(false);
-			}
+                Vector3 move = ((Bro.transform.position - transform.position).normalized) * powerForce * invert * 5;
+                Bro.GetComponent<moveChar>().movement = Vector3.zero;
+                Bro.GetComponent<moveChar>().movement = move;
+                Bro.GetComponent<moveChar>().beingControlled = true;
+                usablePower = 0;
+            } else if (usablePower < 100) {
+                usablePower += Time.deltaTime * 25f;
+            } else if (usablePower > 100) {
+                usablePower = 100;
+            }
 
 			//Power Bar
 			if(usablePower < 100){
@@ -147,9 +135,15 @@ public class moveChar : MonoBehaviour {
 				powerBar.SetActive(false);
 			}
 
-			if(!beingControlled){
-				controller.Move (movement*Time.deltaTime);
-			}
+            if (!beingControlled) {
+                controller.Move(movement * Time.deltaTime);
+            } else if (beingControlled && Mathf.Abs(movement.x) > 0.5f){
+                controller.Move(movement * Time.deltaTime);
+                movement.x = Mathf.Lerp(movement.x,0,Time.deltaTime);
+                if (Mathf.Abs(movement.x) <= 0.5f || controller.velocity.x == 0) {
+                    beingControlled = false;
+                }
+            }
 		}
 	}
 

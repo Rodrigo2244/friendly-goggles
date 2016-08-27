@@ -7,9 +7,6 @@ public class pearlPickup : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 		if(col.gameObject.layer == 9 && !collected) {
-            if (gameManager.Instance != null) {
-                gameManager.Instance.pearlCount++;
-            }
             collected = true;
             col.GetComponent<AudioSource>().PlayOneShot(pickup, 1);
             transform.SetParent(col.transform);
@@ -19,6 +16,9 @@ public class pearlPickup : MonoBehaviour {
 	}
 
     void Die() {
+        if (gameManager.Instance != null) {
+            gameManager.Instance.pearlCount++;
+        }
         Destroy(this.gameObject);
     }
 }
